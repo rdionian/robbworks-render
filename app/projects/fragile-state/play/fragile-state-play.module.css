@@ -1,0 +1,294 @@
+/* ==============================================
+   Fragile State Play Page
+   ==============================================*/
+/* .debug * {
+  outline: 1px solid red !important;
+} */
+/* Override footer spacing just for this page */
+
+/* Floating Home Button */
+.homeButton {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  z-index: 1000;
+  padding: 0.6rem 1.2rem;
+  background: transparent;
+  border: 2px solid #3ca155;
+  border-radius: 8px;
+  color: #3ca155;
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(6px);
+  /* box-shadow: 0 0 12px rgba(0, 255, 100, 0.3); */
+  transition: all 0.3s ease;
+}
+
+.homeButton:hover {
+  box-shadow: 0 0 22px rgba(60, 161, 85, 1);
+  transform: scale(1.08);
+}
+
+@keyframes fadeInButton {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ========================
+      Footer
+  ========================= */
+.footer {
+  background-color: #000;
+  /* your choice */
+  color: #666;
+  /* muted text */
+  text-align: center;
+  padding: 1.5rem 1rem;
+  /* this replaces fixed height */
+
+  /* remove any explicit height */
+  height: auto;
+  min-height: 0;
+  /* reset if something else forced it */
+  box-sizing: border-box;
+  margin-top: 5rem; /* or however far down you want it */
+}
+
+/* Main footer section (tagline + email) */
+.footerMain {
+  margin-bottom: 1rem;
+}
+
+.footerMain .tagline {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.footerMain .email {
+  font-size: 1rem;
+  color: #00bfff;
+  /* theme accent */
+}
+
+.footerLinks {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.emailCenter {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Social icons cleanup */
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;   /* 👈 spacing between icons */
+  margin-top: 0.75rem;
+}
+
+.socialIcons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialIcons svg {
+  width: 24px;  
+  height: 24px;
+  fill: none;           /* keep stroke look */
+  stroke: #3ca155;     /* your blue color */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.socialIcons a:hover svg {
+  transform: scale(1.15);
+}
+
+/* Metadata line (© + built with Next.js) */
+.footerMeta {
+  font-size: .8rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+/* ========== Layout Container ========== */
+.playContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  background-color: #000;
+  color: #ccc;
+  position: relative;
+  z-index: 1;
+}
+
+/* ========== Title and Subtitle ========== */
+.title {
+  font-size: 3.5rem;
+  color: #ffffff; /* white */
+  margin-bottom: 1rem;
+  text-shadow: 0 0 20px rgba(60, 161, 85, 0.25);
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  color: #3ca155;
+  text-align: center;
+  max-width: 800px;
+}
+
+/* ========== Game Embed Box ========== */
+.gameWrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2.5rem;
+  width: 100%;
+  max-width: 1300px;
+  overflow: hidden;
+}
+
+.gameWrapper iframe {
+  border: 2px solid rgba(60, 161, 85, 0.3);
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(60, 161, 85, 0.25);
+  width: 100%;
+  height: 740px;
+}
+
+/* ========== Download Box (under game) ========== */
+.downloadBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.downloadButton {
+  display: none;
+  background-color: transparent;
+  color: #3ca155;
+  border: 2px solid #2f8a44;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 0 10px rgba(60, 161, 85, 0.25);
+}
+
+.downloadButton:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(60, 161, 85, 0.25);
+}
+/* ========== Controls Section ========== */
+.controlSection {
+  position: relative;
+  z-index: 1;
+  margin-top: 3rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: none;
+}
+
+.controlsContainer h2 {
+  text-align: center;
+  font-size: 2.4rem;
+  color: #3ca155;
+  margin-bottom: 2rem;
+  text-shadow: 0 0 12px rgba(60, 161, 85, 0.25);
+}
+
+/* Box holding PC and Xbox text boxes */
+.featuredCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  background: rgba(0, 0, 0, 0.85);
+  /* border: 2px solid rgba(60, 161, 85, 0.35); */
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(60, 161, 85, 0.3);
+  width: 90%;
+  margin: 0 auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* .featuredCard:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 35px rgba(60, 161, 85, 0.35);
+} */
+
+/* Each control text box */
+.textBox {
+  flex: 1;
+  padding: 2rem;
+  border-right: 1px solid rgba(60, 161, 85, 0.1);
+  text-align: left;
+}
+
+.textBox:last-child {
+  border-right: none;
+}
+
+.textBox h3 {
+  color: #3ca155;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.textBox p {
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* ========== Known Bugs Section ========== */
+.bugsSection {
+  margin-top: 3rem;
+  background-color: rgba(1, 1, 1, 1);
+  /* border: 1px solid #2f8a44; */
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ccc;
+  box-shadow: 0 0 10px rgba(47, 138, 68, 0.3);
+}
+
+.bugsSection h2 {
+  color: #3ca155;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.bugsSection ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+}
+
+.bugsSection li {
+  margin-bottom: 0.5rem;
+  color: #aaa;
+}
+

@@ -1,0 +1,364 @@
+.pageContainer {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.pageBackground {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  z-index: -1;
+  pointer-events: none;
+
+  /* Moonlit purple night sky */
+  background: linear-gradient(
+    to top,
+    #05020a 0%,     /* deep shadow base */
+    #120a25 25%,    /* dark purple */
+    #1f1340 50%,    /* night sky purple */
+    #2d1d63 75%,    /* moonlit purple */
+    #3a2c85 100%    /* upper sky glow */
+  );
+
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: 100% 100%;
+}
+
+.pageWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* === TOOLBAR === */
+/* === TOOLBAR COLLAPSE BEHAVIOR === */
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #00bfff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  z-index: 1000;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+.toolbar:hover,
+.toolbar:focus-within {
+  height: 50px;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.navButton {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.navButton:hover {
+  color: #40cfff;
+  transform: translateY(-2px);
+}
+
+
+/* === HERO SECTION === */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: fill;
+  object-position: top center;
+}
+
+.heroText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  padding: 0;
+}
+
+.heroText h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.heroText p {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.playButton {
+  display: none;
+  background: transparent;
+  border: 3px solid #00bfff;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.playButton:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #00bfff;
+}
+
+
+/* === LOGBOOK SECTION === */
+
+.logbookSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  background: transparent !important;
+  border: none !important;
+}
+
+
+/* ========================
+      Footer
+========================= */
+
+.footer {
+  background-color: transparent;
+  color: #666;
+  text-align: center;
+  padding: 1.5rem 1rem;
+  height: auto;
+  min-height: 0;
+  box-sizing: border-box;
+  margin-top: 5rem;
+}
+
+.footerMain {
+  margin-bottom: 1rem;
+}
+
+.footerMain .tagline {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.footerMain .email {
+  font-size: 1rem;
+  color: #76d9f0;
+}
+
+.footerLinks {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.emailCenter {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  margin-top: 0.75rem;
+}
+
+.socialIcons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialIcons svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #caa6ff; /* moonlit purple */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.socialIcons a:hover svg {
+  transform: scale(1.15);
+}
+
+.footerMeta {
+  font-size: .8rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+
+/* === HERO BUTTONS === */
+
+.homeButton {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  color: #9be4ff;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.homeButton:hover {
+  transform: scale(1.08);
+}
+
+.audioToggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #caa6ff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.audioToggle:hover {
+  transform: scale(1.08);
+}
+
+/* =========================
+   coming soon, remove later
+========================= */
+
+.comingSoon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  color: white;
+  font-size: 3rem;
+  letter-spacing: 3px;
+  text-align: center;
+}
+
+/* =========================
+   TABLETS
+========================= */
+
+@media (max-width: 900px) {
+  .heroSection {
+    position: relative;
+    min-height: 60vh;
+  }
+
+  .heroImage {
+    width: 100%;
+    height: 60vh;
+    min-height: 360px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .heroText {
+    padding: 0 1rem;
+  }
+
+  .heroText h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+  }
+
+  .heroText p {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+}
+
+
+/* =========================
+   PHONES
+========================= */
+
+@media (max-width: 600px) {
+  .heroSection {
+    position: relative;
+    min-height: 55vh;
+  }
+
+  .heroImage {
+    width: 100%;
+    height: 55vh;
+    min-height: 300px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .heroText {
+    padding: 0 0.85rem;
+  }
+
+  .heroText h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+  }
+
+  .heroText p {
+    font-size: 1.0rem;
+    line-height: 1.35;
+  }
+
+  .homeButton {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    top: 10px;
+    left: 10px;
+  }
+}

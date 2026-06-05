@@ -1,0 +1,567 @@
+/* -----------------------------------------------------------
+   LOGBOOK CANVAS / LAYOUT
+   ----------------------------------------------------------- */
+
+/* Outer container that centers the book on the page */
+.bookContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1.5rem 1rem;
+  background: transparent;
+}
+
+/* Page heading above the book */
+.logbookTitle {
+  text-align: center;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  padding-top: 4rem;
+}
+
+/* The brown book “cover” */
+.book {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1000px;
+  height: 720px;
+  background: #3e2f1c;
+  border-radius: 10px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* The two-page inner spread */
+.innerBook {
+  position: relative;
+  width: 95%;
+  height: 95%;
+  display: flex;
+  background: linear-gradient(90deg, #faf7f2 49%, #f8f5ef 51%);
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.05),
+    0 8px 25px rgba(0, 0, 0, 0.2),
+    inset 0 0 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+/* Faux spine / paper highlights */
+.innerBook::before,
+.innerBook::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.innerBook::before {
+  width: 180px;
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0.45) 0%,
+    rgba(0, 0, 0, 0.25) 20%,
+    rgba(0, 0, 0, 0.1) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  filter: blur(6px);
+}
+.innerBook::after {
+  width: 200px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    rgba(255, 255, 255, 0.15) 100%
+  );
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+}
+
+/* -----------------------------------------------------------
+   LEFT PAGE — MEDIA STACK (images/videos)
+   ----------------------------------------------------------- */
+
+/* Left page container */
+.leftPage {
+  flex: 1;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fdfcf8;
+  box-shadow: inset -6px 0 12px -6px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+/* Scrollable column of thumbnails */
+.imageGrid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: auto;
+  gap: 1.25rem;
+  padding: 1rem 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+.imageGrid::-webkit-scrollbar { width: 6px; }
+.imageGrid::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+.imageGrid::-webkit-scrollbar-track { background: transparent; }
+
+/* Each media tile (keeps uniform aspect) */
+.imageWrapper,
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* ✅ same size for images & videos */
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* If an <iframe> lives directly in an .imageWrapper, make it behave like an image */
+.imageWrapper iframe {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: none;
+  object-fit: cover;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+.imageWrapper iframe:hover { transform: scale(1.05); }
+
+/* Remove/close button on each media tile (admin mode only) */
+.removeButton {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 14px;
+  cursor: pointer;
+  z-index: 2;
+}
+.removeButton:hover { background: rgba(255, 0, 0, 0.8); }
+
+/* Thumbnails for both images and videos — identical sizing/feel */
+.imageWrapper img,
+.videoWrapper iframe,
+.imageWrapper .media,
+.videoWrapper .media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* ✅ consistent fill */
+  border: none;
+  display: block;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+.imageWrapper img:hover,
+.videoWrapper iframe:hover,
+.imageWrapper .media:hover,
+.videoWrapper .media:hover {
+  transform: scale(1.05);
+}
+
+/* -----------------------------------------------------------
+   RIGHT PAGE — VIEW MODE (Title, Date, Body Text)
+   ----------------------------------------------------------- */
+
+/* Main right page container */
+.rightPage {
+  flex: 1;
+  padding: 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: linear-gradient(90deg, #f9f8f3 49%, #f7f5ee 51%);
+  color: #222;
+  line-height: 1.45;
+  box-shadow: inset 6px 0 12px -6px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 2;
+  overflow-y: auto;
+}
+.rightPage::-webkit-scrollbar { width: 6px; }
+.rightPage::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+/* -------------------- TITLE -------------------- */
+.entryTitle {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0.5rem 0 0.15rem 0; /* title spaced from top, very close to date */
+  line-height: 1.25;
+}
+
+/* -------------------- DATE -------------------- */
+.entryDate {
+  font-size: 1.0rem;     /* ✅ readable but not big */
+  color: #000000;
+  opacity: 0.9;
+  margin-bottom: 0.5rem; /* ✅ keeps date close to title */
+  letter-spacing: 0.2px;
+}
+
+/* -------------------- BODY TEXT -------------------- */
+.entryBody {
+  margin-top: 2.5rem;     /* ✅ pushes only the body downward */
+  height: calc(100% - 120px); /* dynamic height based on page */
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+.entryBody::-webkit-scrollbar { width: 6px; }
+.entryBody::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+}
+
+/* ✅ Smaller readable paragraph text */
+.entryBody p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  max-width: 92%;         /* ✅ keeps text from hitting the spine */
+  white-space: pre-wrap;  /* ✅ preserves line breaks properly */
+}
+
+
+
+
+/* -----------------------------------------------------------
+   ENTRY FORM (admin mode)
+   ----------------------------------------------------------- */
+
+.entryForm {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.entryInput,
+.entryTextarea {
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  background: #f0f0f0;
+  color: #111;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.6rem;
+  outline: none;
+}
+
+.entryTextarea {
+  min-height: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.submitBtn {
+  align-self: flex-end;
+  background-color: #0099ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+.submitBtn:hover { background-color: #007acc; }
+
+/* -----------------------------------------------------------
+   PAGE FLIP CONTROLS (viewer mode)
+   ----------------------------------------------------------- */
+
+.pageFlipLeft,
+.pageFlipRight {
+  position: absolute;
+  bottom: 25px;
+  font-size: 2.3rem;
+  color: rgba(60, 45, 25, 0.8);
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 5;
+}
+.pageFlipLeft:hover,
+.pageFlipRight:hover {
+  color: #caa86b;
+  transform: scale(1.1);
+}
+.pageFlipLeft { left: 35px; }
+.pageFlipRight { right: 35px; }
+
+/* -----------------------------------------------------------
+   ADMIN ACTION BUTTONS (upload, add video)
+   ----------------------------------------------------------- */
+
+.addMediaBtn {
+  padding: 0.5rem;
+  border-radius: 6px;
+  background: #007bff;
+  color: white;
+  border: none;
+  margin-bottom: 0.5rem;
+  margin-right: 0.25rem;
+  cursor: pointer;
+}
+
+
+/* Fullscreen preview overlay */
+.modalOverlay {
+  position: fixed;           /* viewport-fixed */
+  inset: 0;
+  background: rgba(0, 0, 0, 0.80);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100000;           /* blast past everything */
+}
+
+/* The image itself */
+.modalImage {
+  max-width: 92vw;
+  max-height: 88vh;
+  border-radius: 8px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+}
+
+/* Close button */
+.modalClose {
+  position: fixed;           /* pin to viewport corner */
+  top: 16px;
+  right: 20px;
+  background: #fff;
+  color: #111;
+  border: none;
+  border-radius: 6px;
+  padding: .5rem .9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* =========================================================
+   RESPONSIVE: PHONE (≤480px) — Stack layout, bigger tap targets
+   ========================================================= */
+@media (max-width: 480px) {
+  .bookContainer {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .book {
+    width: 100%;
+    height: auto;              /* Let content set height */
+    border-radius: 8px;
+  }
+
+  .innerBook {
+    width: 100%;
+    height: auto;
+    flex-direction: column;    /* Stack pages */
+    background: #faf7f2;       /* Remove split-page gradient */
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+
+  /* Remove spine effects on mobile */
+  .innerBook::before,
+  .innerBook::after {
+    display: none;
+  }
+
+  .leftPage,
+  .rightPage {
+    width: 100%;
+    padding: 1rem 1rem;
+    box-shadow: none;
+  }
+
+  /* Media column: single column, larger thumbnails */
+  .imageGrid {
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    max-height: none;          /* Allow full height, page scrolls */
+    overflow-y: visible;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+  }
+
+  .media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Right page typography */
+  .entryTitle {
+    font-size: 1.05rem;
+    margin: 0.25rem 0 0.15rem 0;
+  }
+
+  .entryDate {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .entryBody {
+    margin-top: 0.75rem;       /* Subtle separation from date */
+    max-height: none;          /* No inner scroll on phone */
+    overflow: visible;
+  }
+
+  .entryBodyText,
+  .rightPage p {
+    font-size: 0.9rem;         /* Comfortable reading size on phone */
+    line-height: 1.5;
+  }
+
+  /* Hide page flip buttons on small screens (swipe/scroll instead) */
+  .pageFlipLeft,
+  .pageFlipRight {
+    display: none;
+  }
+
+  /* Modal: ensure it covers screen and centers content on mobile */
+  .modalOverlay {
+    position: fixed;
+    inset: 0;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 10px;
+  }
+
+  .modalImage {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+  }
+  
+}
+
+/* =========================================================
+   RESPONSIVE: TABLET (481–900px) — Single column but roomier
+   ========================================================= */
+@media (min-width: 481px) and (max-width: 900px) {
+  .bookContainer {
+    padding: 1rem;
+  }
+
+  .book {
+    width: 95%;
+    height: auto;              /* Let content set height */
+  }
+
+  .innerBook {
+    width: 100%;
+    height: auto;
+    flex-direction: column;    /* Still stack for clarity */
+    background: #faf7f2;
+  }
+
+  .innerBook::before,
+  .innerBook::after {
+    display: none;             /* Remove spine for stacked view */
+  }
+
+  .leftPage,
+  .rightPage {
+    width: 100%;
+    padding: 1.25rem 1.25rem;
+  }
+
+  /* Media: roomy, still stacked */
+  .imageGrid {
+    gap: 1rem;
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .imageWrapper {
+    aspect-ratio: 16 / 9;
+    border-radius: 8px;
+  }
+
+  /* Right page typography */
+  .entryTitle {
+    font-size: 1.2rem;
+    margin: 0.35rem 0 0.25rem 0;
+  }
+
+  .entryDate {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .entryBody {
+    margin-top: 1rem;
+    max-height: none;          /* Let page scroll; no nested scroll */
+    overflow: visible;
+  }
+
+  .entryBodyText,
+  .rightPage p {
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  /* Page flip: optional — keep them but lift placement */
+  .pageFlipLeft,
+  .pageFlipRight {
+    font-size: 2rem;
+    bottom: 12px;
+  }
+
+  /* Modal: centered and generous on tablet */
+  .modalOverlay {
+    position: fixed;
+    inset: 0;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 16px;
+  }
+
+  .modalImage {
+    max-width: 92%;
+    max-height: 88vh;
+    object-fit: contain;
+  }
+}
+
+/* =========================================================
+   OPTIONAL: Completely hide Logbook on very small phones
+   (uncomment if you decide to hide it instead of stack)
+   ========================================================= */
+/*
+@media (max-width: 380px) {
+  .bookContainer { display: none; }
+}
+*/

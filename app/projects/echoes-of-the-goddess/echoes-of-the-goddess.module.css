@@ -1,0 +1,411 @@
+
+.pageContainer {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.pageBackground {
+  position: absolute;
+  inset: 0;
+  min-height: 100%;
+  z-index: -1;
+  pointer-events: none;
+
+   background: linear-gradient(
+    to top,
+    #000000 0%,     /* black footer */
+    #0b3d26 10%,    /* dark shadow green */
+    #1c7d3f 35%,    /* grass green */
+    #5bd66b 55%,    /* bright highlight green */
+    #76d9f0 75%,    /* soft sky blue */
+    #9be4ff 100%    /* upper sky */
+  );
+  
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: 100% 100%;
+}
+
+
+.pageWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+
+
+/* === TOOLBAR === */
+/* === TOOLBAR COLLAPSE BEHAVIOR === */
+.toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  color: #00bfff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  z-index: 1000;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+
+/* 👇 expands when hovered (or focused anywhere near top) */
+.toolbar:hover,
+.toolbar:focus-within {
+  height: 50px;
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Buttons */
+.navButton {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.navButton:hover {
+  color: #40cfff;
+  transform: translateY(-2px);
+}
+
+/* === HERO SECTION === */
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: fill;
+  object-position: top center;
+}
+
+.heroText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  z-index: 2;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0;
+  padding: 0;
+}
+
+.heroText h1 {
+  font-size: 4rem;
+  margin: 0;
+}
+
+.heroText p {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.playButton {
+  display: none;
+  background: transparent;
+  border: 3px solid #00bfff;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  padding: 0.8rem 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.playButton:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #00bfff;
+}
+
+/* === LOGBOOK SECTION === */
+.logbookSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+  background: transparent !important;
+  border: none !important;
+}
+
+/* === TECHNICAL SECTION === */
+.technicalSection {
+  padding: 0;
+  margin: 0;
+  background: transparent !important;
+  color: #111;
+  text-align: center;
+  border: none !important;
+}
+
+.technicalSection h2 {
+  font-size: 2.5rem;
+  margin: 0;
+  color: #00bfff;
+}
+
+.technicalSection p {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #333;
+}
+
+.technicalSection ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.technicalSection li {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* ========================
+      Footer
+  ========================= */
+.footer {
+  background-color: #000;
+  /* your choice */
+  color: #666;
+  /* muted text */
+  text-align: center;
+  padding: 1.5rem 1rem;
+  /* this replaces fixed height */
+
+  /* remove any explicit height */
+  height: auto;
+  min-height: 0;
+  /* reset if something else forced it */
+  box-sizing: border-box;
+}
+
+/* ========================
+      Footer
+  ========================= */
+.footer {
+  background-color: transparent;
+  /* your choice */
+  color: #666;
+  /* muted text */
+  text-align: center;
+  padding: 1.5rem 1rem;
+  /* this replaces fixed height */
+
+  /* remove any explicit height */
+  height: auto;
+  min-height: 0;
+  /* reset if something else forced it */
+  box-sizing: border-box;
+  margin-top: 5rem; /* or however far down you want it */
+}
+
+/* Main footer section (tagline + email) */
+.footerMain {
+  margin-bottom: 1rem;
+}
+
+.footerMain .tagline {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.footerMain .email {
+  font-size: 1rem;
+  color: #00bfff;
+  /* theme accent */
+}
+
+.footerLinks {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.emailCenter {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Social icons cleanup */
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;   /* 👈 spacing between icons */
+  margin-top: 0.75rem;
+}
+
+.socialIcons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialIcons svg {
+  width: 24px;  
+  height: 24px;
+  fill: none;           /* keep stroke look */
+  stroke: #76d9f0;     /* your blue color */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.socialIcons a:hover svg {
+  transform: scale(1.15);
+}
+
+/* Metadata line (© + built with Next.js) */
+.footerMeta {
+  font-size: .8rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+/* Home button overlays the hero only (not fixed on scroll) */
+.homeButton {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 6px 12px;
+  color: #76d9f0;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.homeButton:hover {
+  box-shadow: rgba(0, 191, 255, 0.15);
+  transform: scale(1.08);
+}
+
+/* Audio toggle fixed in the upper-right (matches homepage) */
+.audioToggle {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #b8ff9a; /* changes via JS, but default looks "unmuted" */
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.audioToggle:hover {
+  box-shadow: rgba(0, 191, 255, 0.15);
+  transform: scale(1.08);
+}
+
+/* === Base desktop styles (already working) === */
+/* No change needed for large screens here */
+
+
+
+/* =========================
+   TABLETS (<= 900px)
+   ========================= */
+@media (max-width: 900px) {
+  /* Keep hero tall/cinematic on tablet */
+  .heroSection {
+    position: relative;
+    min-height: 60vh;           /* keeps presence */
+  }
+  .heroImage {
+    width: 100%;
+    height: 60vh;               /* fill top area */
+    min-height: 360px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Fit hero text for tablet */
+  .heroText {
+    padding: 0 1rem;
+  }
+  .heroText h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+  }
+  .heroText p {
+    font-size: 1.05rem;
+    line-height: 1.35;
+  }
+}
+
+/* =========================
+   PHONES (<= 600px)
+   ========================= */
+@media (max-width: 600px) {
+  /* Keep hero filling the top of the screen */
+  .heroSection {
+    position: relative;
+    min-height: 55vh;
+  }
+  .heroImage {
+    width: 100%;
+    height: 55vh;               /* do NOT shrink; keep cover */
+    min-height: 300px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  /* Scale down text to fit nicely on small screens */
+  .heroText {
+    padding: 0 0.85rem;
+  }
+  .heroText h1 {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    margin-bottom: 0.35rem;
+    text-shadow: 0 2px 6px rgba(0,0,0,.35);
+  }
+  .heroText p {
+    font-size: 1.0rem;
+    line-height: 1.35;
+  }
+
+  /* Optional: keep the Home button from overlapping text too much */
+  .homeButton {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    top: 10px;  /* assumes it's absolutely positioned in the hero */
+    left: 10px;
+  }
+}

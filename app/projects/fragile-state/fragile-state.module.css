@@ -1,0 +1,696 @@
+.pageWrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ensures full page height */
+}
+
+.pageContent {
+  flex: 1; /* pushes footer down */
+}
+/* ================================
+   HERO SECTION (Adapted from Home, Positions Locked)
+   ================================ */
+
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: auto; /* Like home—allows image to dictate height */
+  display: block;
+  overflow: hidden; /* Prevents resize glitches */
+}
+
+.heroBg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto; /* Full image scales naturally like home */
+  object-fit: fill; /* Fills without cut-off like home */
+  object-position: top center; /* Top anchor for consistency */
+}
+
+
+/* Keep hero text pinned in its own place */
+.heroText {
+  position: absolute;
+  bottom: 5%;
+  right: 10%;
+  text-align: right;
+  color: rgb(230, 226, 226);
+  z-index: 5;
+}
+
+.heroText h1 {
+  font-size: clamp(4rem, 6vw, 7rem); /* bigger text that scales with screen */
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.menuContainer {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+  width: clamp(220px, 25vw, 275px); /* narrower scaling */
+  height: clamp(400px, 40vw, 525px); /* locks height visually */
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; /* keeps logo/buttons spaced evenly */
+  z-index: 5;
+}
+
+.logo {
+  width: 70%;
+  max-width: 180px;
+  margin-bottom: calc(0.5rem + 0.3vw);
+}
+
+.menuButtons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly; /* consistent vertical spacing */
+  align-items: center;
+  width: 100%;
+  height: 100%; /* take remaining vertical space inside container */
+}
+
+.menuButtons a {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 0.4rem 0;
+  padding: 0.75rem 0.5rem;
+  color: #fff;
+  font-weight: 700;
+  font-size: clamp(1rem, 1.3vw, 1.4rem);
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.menuButtons a:hover {
+  color: #ffd900; /* electric yellow highlight */
+  transform: scale(1.05);
+  text-shadow: 0 0 8px #ffd900;
+}
+
+
+/* =========================
+    About Section
+    ======================== */
+
+.aboutSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.aboutBox {
+  background: rgba(10, 10, 10, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 90%;
+  box-shadow: 0 0 20px rgba(0, 255, 150, 0.25);
+  backdrop-filter: blur(6px);
+  animation: pulseGlow 6s ease-in-out infinite;
+  margin: 0 auto 2rem;
+}
+
+/* .aboutBox:hover {
+  transform: translate(0, -5px);
+  box-shadow: 0 0 35px rgba(0, 255, 180, 0.4);
+} */
+
+.aboutBox h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 255, 200, 0.4);
+}
+
+.aboutBox p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #c8f9f9;
+}
+
+/* ==================
+    Gameplay Section
+  ====================   */
+
+.gameplaySection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.gameplayBox {
+  background: rgba(10, 10, 10, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 16px;
+  max-width: 900px;
+  width: 90%;
+  box-shadow: 0 0 30px rgba(0, 200, 255, 0.4);
+  backdrop-filter: blur(6px);
+  animation: pulseGlow 6s ease-in-out infinite;
+  margin: 0 auto 2rem;
+}
+
+
+/* .gameplayBox:hover {
+  transform: translate(0, -5px);
+  box-shadow: 0 0 35px rgba(0, 200, 255, 0.45);
+} */
+
+.gameplayBox h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0, 255, 200, 0.4);
+}
+
+.gameplayBox p {
+  font-size: 1.15rem;
+  line-height: 1.8;
+  color: #c8f9f9;
+}
+
+/* ========================
+   GALLERY SECTION
+======================== */
+/* ===========================
+   🎡 3D Carousel Styles
+   =========================== */
+.gallerySection {
+  padding: 12rem 0;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.gallerySection h2 {
+  text-align: center;
+  margin-bottom: -2rem;
+  width: 100%;
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-weight: 300;
+  text-shadow: 0 0 10px rgba(0, 255, 200, 0.4);
+}
+
+.carouselWrapper {
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.carousel3D {
+  perspective: 2500px; 
+  position: relative;
+  width: 80vmin; 
+  margin: 0 auto;
+  height: 50vmin; 
+  min-height: 350px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --carousel-radius: 500px; /* desktop default - adjust to taste */
+}
+
+.carouselTrack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  transform-origin: center center 0;
+}
+
+
+.slide {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40vmin; 
+  max-width: 500px;
+  height: 22.5vmin; 
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 1);
+  transition: all 0.8s ease;
+  opacity: 1;
+  z-index: 1;
+  margin-left: -20vmin; 
+  margin-top: -11.25vmin; 
+}
+
+
+.slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  backface-visibility: hidden;
+  filter: saturate(1.03) contrast(1.02);
+}
+
+/* Buttons */
+.prevButton,
+.nextButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.45);
+  border: none;
+  color: white;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  z-index: 20;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(0, 200, 255, 0.8); /* subtle blue glow */
+}
+
+.prevButton:hover,
+.nextButton:hover {
+  background: rgba(0, 0, 0, 0.65);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 1.0); /* brighter glow on hover */
+  
+}
+
+.nextButton {
+  right: -10px;
+  top: 90%;
+}
+
+.prevButton {
+  left: -10px;
+  top: 90%;
+}
+
+
+
+/* ===========================
+   🔸 ANIMATIONS
+=========================== */
+@keyframes pulseGlowYellow {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255, 200, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(255, 220, 0, 0.45);
+  }
+}
+
+@keyframes gentlePop {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 25px rgba(255, 200, 0, 0.25);
+  }
+  50% {
+    transform: scale(1.015);
+    box-shadow: 0 0 35px rgba(255, 200, 0, 0.4);
+  }
+}
+
+/* removed looping hoverPop animation since we’ll handle hover with transitions */
+@keyframes buttonPop {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(255, 200, 0, 0.4);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 220, 0, 0.8);
+  }
+}
+
+
+/* ===========================
+   🔸 LAYOUT STYLES
+=========================== */
+.downloadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  padding: 2rem 0; /* adds a bit of breathing room */
+  box-sizing: border-box;
+}
+
+
+.downloadBox {
+  position: relative;
+  background: rgba(10, 10, 10, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  max-width: 700px;
+  width: 95%;
+  height: 200px;
+  box-shadow: 0 0 25px rgba(255, 200, 0, 0.25);
+  backdrop-filter: blur(6px);
+  animation: pulseGlowYellow 6s ease-in-out infinite;
+  margin: 0 auto 2rem;
+  top: -100px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.downloadBox:hover {
+  transform: scale(1.02); /* 👈 slight pop effect */
+  box-shadow: 0 0 40px rgba(255, 200, 0, 0.4); /* 👈 subtle brighter glow */
+}
+
+
+/* ===========================
+   🔸 BUTTON
+=========================== */
+.playButton {
+  display: inline-block;
+  text-decoration: none;
+  color: #fff;
+  border: 2px solid rgba(255, 204, 51, 0.55);
+  background: transparent;
+  padding: 0.85rem 2.5rem;
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  transition: transform 0.25s ease,
+              box-shadow 0.25s ease,
+              background 0.25s ease,
+              color 0.25s ease;
+}
+
+/* Softer hover glow matching pulseGlowYellow */
+.playButton:hover {
+  transform: scale(1.03);
+  background: rgba(255, 204, 51, 0.08); /* softer background glow */
+  box-shadow: 0 0 35px rgba(255, 204, 51, 0.15); /* matches pulseGlowYellow */
+  color: #ffe066; /* slightly lighter text for hover contrast */
+}
+
+/* ======================
+    Video Section
+  ======================= */
+
+.videoWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* adjust to fit your layout */
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 16px; /* smooth corners */
+  /* box-shadow: 0 0 25px rgba(0, 255, 200, 0.3); optional glow */
+  margin: 0 auto;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: inherit;
+}
+.gameplayVideo {
+  width: 90%;
+  max-width: 900px;
+  border-radius: 12px;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gameplayVideo:hover {
+  transform: scale(1.03);
+}
+
+/* ========================
+   Glowing panels
+  ======================= */
+.sectionBox {
+  background: rgba(20, 20, 20, 0.75); /* translucent dark overlay */
+  border-radius: 16px;
+  padding: 2.5rem;
+  margin: 4rem auto;
+  max-width: 900px;
+  box-shadow: 0 0 30px rgba(0, 200, 255, 0.15); /* subtle neon glow */
+  backdrop-filter: blur(8px); /* glassy effect */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.sectionBox:hover {
+  box-shadow: 0 0 45px rgba(0, 255, 180, 0.25);
+  transform: translateY(-4px);
+}
+
+@keyframes softPulse {
+  0% {
+    box-shadow: 0 0 20px rgba(0, 255, 180, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(0, 255, 180, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(0, 255, 180, 0.15);
+  }
+}
+
+/* ========================
+      Footer
+  ========================= */
+.footer {
+  background-color: #000;
+  /* your choice */
+  color: #666;
+  /* muted text */
+  text-align: center;
+  padding: 1.5rem 1rem;
+  /* this replaces fixed height */
+
+  /* remove any explicit height */
+  height: auto;
+  min-height: 0;
+  /* reset if something else forced it */
+  box-sizing: border-box;
+}
+
+/* Main footer section (tagline + email) */
+.footerMain {
+  margin-bottom: 1rem;
+}
+
+.footerMain .tagline {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.footerMain .email {
+  font-size: 1rem;
+  color: #00bfff;
+  /* theme accent */
+}
+
+.footerLinks {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.emailCenter {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Social icons cleanup */
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;   /* 👈 spacing between icons */
+  margin-top: 0.75rem;
+}
+
+.socialIcons a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socialIcons svg {
+  width: 24px;  
+  height: 24px;
+  fill: none;           /* keep stroke look */
+  stroke: rgba(255, 200, 0, 0.6);  /* your blue color */
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.socialIcons a:hover svg {
+  transform: scale(1.15);
+}
+
+/* Metadata line (© + built with Next.js) */
+.footerMeta {
+  font-size: .8rem;
+  color: #666;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+
+
+   /* Hide the side menu on mobile */
+  .menuContainer {
+    display: none;
+  }
+
+  /* Scale hero text for smaller screens */
+  .heroText {
+    bottom: 10%;
+    right: 5%;
+    text-align: center;
+    width: 90%;
+  }
+
+  .heroText h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.2;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+
+  .gallerySection {
+    padding: 0rem 0 15rem; /* reduce top/bottom spacing */
+    min-height: auto; /* don’t force vertical space */
+  }
+
+  .gallerySection h2 {
+    font-size: 2.2rem; /* smaller title */
+    margin-bottom: 1rem; /* tighten space between title & carousel */
+  }
+
+  .carouselWrapper {
+    padding: 1rem 0; /* reduce inner vertical padding */
+  }
+
+  .carousel3D {
+    width: 90vw;  /* full width scaling */
+    height: 55vw; /* maintain aspect ratio */
+    min-height: 220px;
+  }
+
+  .slide {
+    width: 60vw;
+    height: 40vw;
+    margin-left: -30vw;
+    margin-top: -17vw;
+  }
+
+  .prevButton,
+  .nextButton {
+    display: none;
+  }
+
+  .carouselWrapper {
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.carousel3D {
+  perspective: 1200px; 
+  position: relative;
+  width: 80vmin; 
+  margin: 0 auto;
+  height: 50vmin; 
+  min-height: 350px;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  --carousel-radius: 200px; /* mobile radius - adjust to taste */
+}
+
+.carouselTrack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+  transform-origin: center center 0;
+}
+
+
+.slide {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40vmin; 
+  max-width: 500px;
+  height: 22.5vmin; 
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 1);
+  transition: all 0.8s ease;
+  opacity: 1;
+  z-index: 1;
+  margin-left: -20vmin; 
+  margin-top: -11.25vmin; 
+}
+
+}
+
+/* Hide Play Demo button on all screens below laptop size */
+@media (max-width: 1023px) {
+ .downloadBox{
+    display: none;
+  }
+}

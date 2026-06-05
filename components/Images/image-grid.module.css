@@ -1,0 +1,63 @@
+.imageGridSection {
+  text-align: center;
+  margin: 4rem 0;
+  background: transparent;
+}
+
+.title {
+  color: #fff;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* ✅ Desktop — EXACT 2x2 grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  width: 90%;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+/* ✅ Landscape image style, no cropping */
+.image {
+  width: 100%;
+  aspect-ratio: 16 / 9; /* keeps landscape shape */
+  object-fit: cover; /* fills but doesn't distort, keeps full frame */
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.image:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+}
+
+/* ✅ Tablet (≤ 900px) — still 2 columns */
+@media (max-width: 900px) {
+  .grid {
+    width: 95%;
+    gap: 1.5rem;
+  }
+}
+
+/* ✅ Phone (≤ 480px) — 1 column stacked */
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .title {
+    font-size: 1.6rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .image {
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,385 @@
+/* =========================================================
+   TECHNICAL LOG — CLIPBOARD LAYOUT & CARDS
+   ========================================================= */
+
+/* Section wrapper */
+.technicalSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem;
+  background: transparent;
+  color: #111;
+}
+
+/* Optional big title (only if you render it) */
+.sectionTitle {
+  font-size: 2.2rem;
+  color: #00bfff;
+  text-align: center;
+  margin-bottom: 2.25rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+/* Clipboard board */
+.clipboard {
+  position: relative;
+  background: #704b2a;
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+  margin: 3rem auto;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* Larger but responsive */
+  width: min(750px, 85vw);
+  aspect-ratio: 2.8 / 4;
+}
+
+/* Metal clip */
+.clip {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: 35px;
+  background: linear-gradient(to bottom, #ccc, #555);
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* “Paper” sheet */
+.paper {
+  position: relative;                 /* needed for dateBadge */
+  background: #fff;
+  width: 90%;
+  height: 92%;
+  border-radius: 6px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  overflow: hidden;                    /* no outer scrollbars */
+}
+
+/* Top-right date (clean, no box) */
+.dateBadge {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.82rem;
+  color: #444;
+  letter-spacing: 0.2px;
+  user-select: none;
+}
+
+/* Column that holds the 4 cards */
+.logContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  flex-grow: 1;
+}
+
+/* Individual card */
+.logCard {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #00bfff;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.1rem 1.25rem;
+  text-align: left;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  /* Scroll only when content exceeds this height */
+  max-height: 190px;
+  overflow-y: auto;
+
+  scrollbar-width: thin;                 /* Firefox */
+  scrollbar-color: #00bfff #f0f0f0;
+}
+.logCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Card heading */
+.logCard h3 {
+  font-size: 1.15rem;
+  margin: 0 0 0.6rem 0;
+  color: #007acc;
+  line-height: 1.25;
+}
+
+/* Default p inside a card (safety net) */
+.logCard p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+/* Viewer text — force smaller, true black, high specificity */
+.cardText {
+  font-size: 0.85rem !important;
+  line-height: 1.55 !important;
+  color: #000 !important;
+}
+
+/* Muted variants (Loading…, Coming soon…) */
+.cardTextMuted {
+  font-size: 0.85rem !important;
+  line-height: 1.55 !important;
+  color: #666 !important;
+}
+
+/* Admin textareas inside cards */
+.logTextarea,
+.logCard textarea {
+  width: 100%;
+  height: 100%;
+  min-height: 110px;
+  max-height: 240px;
+  padding: 0.8rem 1rem;
+  resize: vertical;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 6px;
+  outline: none;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  background: #fff;
+  color: #111;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+  transition: box-shadow 0.15s ease, transform 0.12s ease;
+}
+.logTextarea:focus,
+.logCard textarea:focus {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+/* Submit/Clear buttons (admin) */
+.submitBtnTech {
+  background-color: #0099ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  transition: background 0.18s ease, transform 0.08s ease;
+}
+.submitBtnTech:hover {
+  background-color: #007acc;
+  transform: translateY(-2px);
+}
+.clearBtnTech {
+  background: #e0e0e0;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+/* Responsive tweaks */
+/* @media (max-width: 720px) {
+  .logContent { gap: 1rem; }
+  .logCard { padding: 1rem; max-height: 200px; }
+  .logCard h3 { font-size: 1.05rem; }
+  .cardText, .cardTextMuted { font-size: 0.9rem !important; }
+} */
+
+/* =========================================================
+   TECHNICAL LOG — REMOVE CLIPBOARD ON TABLET/PHONE
+   (Matches your actual class names)
+   ========================================================= */
+
+/* ===== Phone (≤480px) ===== */
+@media (max-width: 480px) {
+  .technicalSection {
+    padding: 2rem 1rem !important;
+    background: transparent;
+  }
+
+  /* Kill the clipboard styling */
+  .clipboard {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  /* Hide the metal clip */
+  .clip {
+    display: none !important;
+  }
+
+  /* Paper becomes a plain container */
+  .paper {
+    width: 100% !important;
+    height: auto !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    position: relative; /* keep date badge anchoring */
+  }
+
+  /* Date badge: simple, no chrome */
+  .dateBadge {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    color: #111 !important;
+    font-size: 0.9rem !important;
+    font-weight: 600;
+  }
+
+  /* Content stack */
+  .logContent {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem !important;
+    margin-top: 2rem; /* leave a little room under the date */
+  }
+
+  /* Cards become simple panels */
+  .logCard {
+    background: #ffffff !important;
+    border: 1px solid #e6e6e6 !important;
+    border-left: 4px solid #00bfff !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+    padding: 0.9rem 1rem !important;
+    max-height: none !important;       /* no tiny boxes */
+    overflow: visible !important;       /* scroll only if needed below */
+  }
+
+  /* Text inside cards */
+  .logCard h3 {
+    margin: 0 0 0.5rem 0 !important;
+    font-size: 1.05rem !important;
+    color: #007acc !important;
+  }
+  .cardText,
+  .cardTextMuted,
+  .logCard p {
+    font-size: 0.92rem !important;
+    line-height: 1.55 !important;
+    color: #111 !important;
+  }
+  .cardTextMuted {
+    opacity: 0.6 !important;
+  }
+
+  /* Only scroll when content exceeds a reasonable height */
+  .logCard {
+    max-height: 320px !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin;
+    scrollbar-color: #00bfff #f0f0f0;
+  }
+  .logCard::-webkit-scrollbar { width: 6px; }
+  .logCard::-webkit-scrollbar-thumb {
+    background: #00bfff;
+    border-radius: 3px;
+  }
+
+  /* Textarea in admin mode */
+  .logTextarea {
+    min-height: 120px !important;
+    max-height: 320px !important;
+    font-size: 0.95rem !important;
+    color: #111 !important;
+  }
+}
+
+/* ===== Tablet (481px–900px) ===== */
+@media (min-width: 481px) and (max-width: 900px) {
+  .technicalSection {
+    padding: 2.5rem 1.25rem !important;
+  }
+
+  .clipboard {
+    background: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  .clip {
+    display: none !important;
+  }
+
+  .paper {
+    width: 100% !important;
+    height: auto !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .dateBadge {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    color: #111 !important;
+    font-size: 1rem !important;
+    font-weight: 600;
+  }
+
+  .logContent {
+    gap: 1rem !important;
+    margin-top: 2.25rem;
+  }
+
+  .logCard {
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    border-left: 5px solid #00bfff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08) !important;
+    padding: 1rem 1.2rem !important;
+    max-height: 360px !important;
+    overflow-y: auto !important;
+  }
+
+  .logCard h3 {
+    margin: 0 0 0.6rem 0 !important;
+    font-size: 1.15rem !important;
+  }
+  .cardText,
+  .cardTextMuted,
+  .logCard p {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+    color: #111 !important;
+  }
+  .cardTextMuted { opacity: 0.6 !important; }
+
+  .logTextarea {
+    min-height: 140px !important;
+    max-height: 360px !important;
+    font-size: 1rem !important;
+  }
+}
