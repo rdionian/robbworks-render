@@ -27,7 +27,7 @@ export default function BotLanding() {
   return (
     <div className="text-white">
       {/* Navigation */}
-      <nav className="bg-black border-b border-white/10 relative">
+      <nav className="bg-black border-b border-white/10 relative max-[768px]:hidden">
         <a href="/" className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 no-underline">
           <img src="/logo.png" alt="RobbWorks" className="h-7 w-auto" />
           <span className="text-white font-bold text-[0.9rem] tracking-[0.02em]">robbworks</span>

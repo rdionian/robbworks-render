@@ -93,7 +93,7 @@ export default function WebDevelopment() {
       </nav>
 
       {/* Hero */}
-      <section className="pt-[10rem] pb-[6rem] px-8 text-center bg-[#1e2d3d] max-[768px]:pt-[7rem] max-[768px]:pb-[4rem] max-[768px]:px-6">
+      <section className="pt-[10rem] pb-[6rem] px-8 text-center bg-[#1e2d3d] max-[768px]:pt-[4rem] max-[768px]:pb-[4rem] max-[768px]:px-6">
         <h1 className="text-[2.6rem] font-bold leading-[1.25] text-[#f0f0f0] mx-auto mb-5 max-w-[500px] tracking-[-0.02em] max-[768px]:text-[1.9rem]">Custom Websites for Creatives &amp; Small Businesses</h1>
         <p className="text-[1.15rem] text-white/60 leading-[1.7] max-w-[560px] mx-auto m-0">Clean, fast, and built to fit your brand.</p>
       </section>

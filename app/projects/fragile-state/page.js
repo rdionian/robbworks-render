@@ -93,7 +93,7 @@ export default function FragileState() {
           >
             <img src="/game-logo.png" alt="Fragile State Logo" className="w-[70%] max-w-[180px] mb-2" />
             <div className="flex flex-col justify-evenly items-center w-full h-full">
-              {["#", "#about", "#gameplay", "#gallery", "#download"].map((href, i) => {
+              {["/", "#about", "#gameplay", "#gallery", "#download"].map((href, i) => {
                 const labels = ["Home", "About", "Gameplay", "Gallery", "Download"];
                 const hrefs = ["/", "#about", "#gameplay", "#gallery", "#download"];
                 return (

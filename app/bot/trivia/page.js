@@ -1,15 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 
-const navLinks = [
-  { href: "/#about", label: "About" },
-  { href: "/#portfolio", label: "Portfolio" },
-  { href: "/projects/google-play/volcano-jumper", label: "Mobile" },
-  { href: "/#development", label: "Development" },
-  { href: "/bot", label: "Discord Bot", active: true },
-  { href: "/web-development", label: "Web Dev" },
-  { href: "/#contact", label: "Contact" },
-];
 
 export default function TriviaBuilder() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -147,10 +138,20 @@ export default function TriviaBuilder() {
 
   const inputClass = "w-full bg-black/30 border border-[#b8ff9a]/30 rounded-lg px-4 py-2.5 text-white text-sm focus:outline-none focus:border-[#b8ff9a]/60 placeholder:text-[#666]";
 
+  const navLinks = [
+    { href: "/#about", label: "About" },
+    { href: "/#portfolio", label: "Portfolio" },
+    { href: "/projects/google-play/volcano-jumper", label: "Mobile" },
+    { href: "/#development", label: "Development" },
+    { href: "/bot", label: "Discord Bot", active: true },
+    { href: "/web-development", label: "Web Dev" },
+    { href: "/#contact", label: "Contact" },
+  ];
+
   return (
     <>
       {/* Navigation */}
-      <nav className="bg-black border-b border-white/10 relative">
+      <nav className="bg-black border-b border-white/10 relative max-[768px]:hidden">
         <a href="/" className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 no-underline">
           <img src="/logo.png" alt="RobbWorks" className="h-7 w-auto" />
           <span className="text-white font-bold text-[0.9rem] tracking-[0.02em]">robbworks</span>
