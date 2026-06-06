@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import pool from "@/lib/db";
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -23,7 +23,7 @@ export async function GET(request) {
 
     console.log('[DEBUG 2] Running quiz query:', quizQuery);
 
-    const { rows: quizRows } = await sql.query(quizQuery);
+    const { rows: quizRows } = await pool.query(quizQuery);
 
     console.log('[DEBUG 3] Quiz query results:', quizRows.length, 'rows');
 
@@ -55,7 +55,7 @@ export async function GET(request) {
 
       console.log('[DEBUG 6] Database questions query:', questionsQuery);
 
-      const { rows: questions } = await sql.query(questionsQuery);
+      const { rows: questions } = await pool.query(questionsQuery);
       dbQuestions = questions;
       console.log('[DEBUG 7] Found', dbQuestions.length, 'database questions');
     }

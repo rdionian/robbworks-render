@@ -1,4 +1,4 @@
-import { sql } from "@vercel/postgres";
+import pool from "@/lib/db";
 import crypto from "crypto";
 
 export const runtime = "nodejs";
@@ -29,7 +29,7 @@ function verifySignedCookie(signed) {
 
 export async function GET() {
   try {
-    const result = await sql`SELECT * FROM technical_logs ORDER BY created_at DESC`;
+    const result = await pool.query("SELECT * FROM technical_logs ORDER BY created_at DESC");
     return Response.json(result.rows, { status: 200 });
   } catch (err) {
     console.error("❌ Server error:", err);
@@ -53,11 +53,10 @@ export async function POST(request) {
   const { developmentProgress, gameMechanics, artDesign, audio } = payload;
 
   try {
-    const result = await sql`
-      INSERT INTO technical_logs (development_progress, game_mechanics, art_design, audio)
-      VALUES (${developmentProgress}, ${gameMechanics}, ${artDesign}, ${audio})
-      RETURNING *
-    `;
+    const result = await pool.query(
+      "INSERT INTO technical_logs (development_progress, game_mechanics, art_design, audio) VALUES ($1, $2, $3, $4) RETURNING *",
+      [developmentProgress, gameMechanics, artDesign, audio]
+    );
     return Response.json({ success: true, data: result.rows }, { status: 200 });
   } catch (err) {
     console.error("❌ Server error:", err);

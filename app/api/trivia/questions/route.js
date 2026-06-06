@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import pool from "@/lib/db";
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -34,15 +34,15 @@ export async function GET(request) {
       LIMIT ${limit} OFFSET ${offset}
     `;
 
-    const { rows: questions } = await sql.query(questionsQuery);
+    const { rows: questions } = await pool.query(questionsQuery);
 
     // Get total count
     const countQuery = `
-      SELECT COUNT(*) as count FROM TriviaQuestions 
+      SELECT COUNT(*) as count FROM TriviaQuestions
       ${whereClause}
     `;
 
-    const { rows: countRows } = await sql.query(countQuery);
+    const { rows: countRows } = await pool.query(countQuery);
     const totalCount = parseInt(countRows[0].count);
 
     return NextResponse.json({

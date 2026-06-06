@@ -1,4 +1,4 @@
-import { sql } from "@vercel/postgres";
+import pool from "@/lib/db";
 import nodemailer from "nodemailer";
 
 export async function POST(request) {
@@ -10,10 +10,10 @@ export async function POST(request) {
       return Response.json({ error: "Email is required" }, { status: 400 });
     }
 
-    await sql`
-      INSERT INTO signups (first_name, last_name, email, category, message)
-      VALUES (${firstName}, ${lastName}, ${email}, ${category}, ${message})
-    `;
+    await pool.query(
+      "INSERT INTO signups (first_name, last_name, email, category, message) VALUES ($1, $2, $3, $4, $5)",
+      [firstName, lastName, email, category, message]
+    );
 
     console.log("✅ Insert success");
 

@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import pool from "@/lib/db";
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
@@ -12,7 +12,7 @@ export async function GET(request) {
       LIMIT 10
     `;
 
-    const { rows } = await sql.query(query);
+    const { rows } = await pool.query(query);
 
     return NextResponse.json({
       quizzes: rows

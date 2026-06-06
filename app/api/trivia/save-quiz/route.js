@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import pool from "@/lib/db";
 import { NextResponse } from 'next/server';
 
 export async function POST(request) {
@@ -38,7 +38,7 @@ export async function POST(request) {
       `;
     }
 
-    const { rows } = await sql.query(query);
+    const { rows } = await pool.query(query);
 
     return NextResponse.json({
       success: true,

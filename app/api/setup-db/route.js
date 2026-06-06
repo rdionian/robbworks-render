@@ -1,4 +1,4 @@
-import { sql } from "@vercel/postgres";
+import pool from "@/lib/db";
 import crypto from "crypto";
 
 // ---------- auth helpers (match your login/middleware) ----------
@@ -34,7 +34,7 @@ export async function GET(request) {
   }
 
   try {
-    await sql`
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS signups (
         id         SERIAL PRIMARY KEY,
         first_name TEXT,
@@ -44,9 +44,9 @@ export async function GET(request) {
         message    TEXT,
         created_at TIMESTAMPTZ DEFAULT NOW()
       )
-    `;
+    `);
 
-    await sql`
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS log_entries (
         id         SERIAL PRIMARY KEY,
         title      TEXT NOT NULL,
@@ -55,9 +55,9 @@ export async function GET(request) {
         media      TEXT,
         created_at TIMESTAMPTZ DEFAULT NOW()
       )
-    `;
+    `);
 
-    await sql`
+    await pool.query(`
       CREATE TABLE IF NOT EXISTS technical_logs (
         id                   SERIAL PRIMARY KEY,
         development_progress TEXT,
@@ -66,7 +66,7 @@ export async function GET(request) {
         audio                TEXT,
         created_at           TIMESTAMPTZ DEFAULT NOW()
       )
-    `;
+    `);
 
     return Response.json({ success: true, message: "Tables created." }, { status: 200 });
   } catch (err) {

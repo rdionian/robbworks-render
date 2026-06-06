@@ -1,5 +1,4 @@
-import { sql } from "@vercel/postgres";
-import { put } from "@vercel/blob";
+import pool from "@/lib/db";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 
@@ -150,28 +149,6 @@ export async function POST(request) {
 
   const contentType = request.headers.get("content-type") || "";
 
-  // Handle file uploads with Vercel Blob
-  if (contentType.includes("multipart/form-data")) {
-    try {
-      const formData = await request.formData();
-      const file = formData.get("file");
-      
-      if (!file) {
-        return Response.json({ error: "No file provided" }, { status: 400 });
-      }
-
-      // Upload to Vercel Blob
-      const blob = await put(file.name, file, {
-        access: "public",
-      });
-
-      return Response.json({ url: blob.url }, { status: 200 });
-    } catch (err) {
-      console.error("Upload error:", err);
-      return Response.json({ error: "Upload failed" }, { status: 500 });
-    }
-  }
-
   if (!contentType.includes("application/json")) {
     return Response.json({ error: "Expected application/json" }, { status: 400 });
   }
@@ -191,11 +168,10 @@ export async function POST(request) {
   const normalizedMedia = normalizeMedia(media);
 
   try {
-    const result = await sql`
-      INSERT INTO log_entries (title, date, text_body, media)
-      VALUES (${title}, ${date}, ${text_body}, ${JSON.stringify(normalizedMedia)})
-      RETURNING *
-    `;
+    const result = await pool.query(
+      "INSERT INTO log_entries (title, date, text_body, media) VALUES ($1, $2, $3, $4) RETURNING *",
+      [title, date, text_body, JSON.stringify(normalizedMedia)]
+    );
     const insertData = result.rows;
 
     // Send emails to devlog subscribers
@@ -203,7 +179,7 @@ export async function POST(request) {
     if (transporter) {
       let subscribers = [];
       try {
-        const subResult = await sql`SELECT email FROM signups WHERE category = 'devlog'`;
+        const subResult = await pool.query("SELECT email FROM signups WHERE category = 'devlog'");
         subscribers = subResult.rows;
       } catch {
         subscribers = [];
@@ -255,7 +231,7 @@ https://www.robbworks.dev/projects/moonlit-journey`;
 
 export async function GET() {
   try {
-    const result = await sql`SELECT * FROM log_entries ORDER BY date DESC`;
+    const result = await pool.query("SELECT * FROM log_entries ORDER BY date DESC");
     return Response.json(result.rows, { status: 200 });
   } catch (err) {
     console.error("❌ Server error:", err);
