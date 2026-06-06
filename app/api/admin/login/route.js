@@ -46,15 +46,16 @@ export async function POST(request) {
       return NextResponse.json({ error: "Too many attempts" }, { status: 429 });
     }
 
-    const { password } = await request.json();
-    if (typeof password !== "string") {
+    const { username, password } = await request.json();
+    if (typeof username !== "string" || typeof password !== "string") {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
 
+    const envUser = process.env.ADMIN_USERNAME || "";
     const envPass = process.env.ADMIN_PASSWORD || "";
-    const ok = safeEqual(password, envPass);
+    const ok = safeEqual(username, envUser) && safeEqual(password, envPass);
     if (!ok) {
-      return NextResponse.json({ error: "Invalid password" }, { status: 401 });
+      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
     }
 
     // Minimal session payload: { sid, exp }
