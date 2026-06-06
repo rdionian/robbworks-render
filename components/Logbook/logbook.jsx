@@ -407,10 +407,10 @@ export default function Logbook({ project }) {
 
           {!isAdmin && entries.length > 1 && (
             <>
-              <button className={styles.pageFlipLeft} onClick={handlePrev}>
+              <button className={styles.pageFlipLeft} onPointerDown={handlePrev}>
                 <FaArrowAltCircleLeft />
               </button>
-              <button className={styles.pageFlipRight} onClick={handleNext}>
+              <button className={styles.pageFlipRight} onPointerDown={handleNext}>
                 <FaArrowAltCircleRight />
               </button>
             </>
