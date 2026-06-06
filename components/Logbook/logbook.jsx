@@ -78,6 +78,7 @@ export default function Logbook({ project }) {
               media: e.media ? JSON.parse(e.media) : [],
             }));
             setEntries(parsed);
+            setCurrentIndex(0);
           }
         } catch {
           setEntries([]);
