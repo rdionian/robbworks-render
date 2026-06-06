@@ -98,7 +98,8 @@ export async function middleware(req) {
   }
 
   // CSRF: relaxed in dev, strict in prod (uses ALLOWED_ORIGINS)
-  if (req.method !== "GET" && req.method !== "HEAD") {
+  // Skip for /api/upload — it's already protected by the signed SameSite=lax cookie
+  if (req.method !== "GET" && req.method !== "HEAD" && !pathname.startsWith("/api/upload")) {
     if (!isAllowedCsrf(req)) {
       return NextResponse.json({ error: "Bad origin" }, { status: 403 });
     }
