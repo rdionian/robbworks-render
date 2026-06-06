@@ -1,5 +1,14 @@
-import { put } from "@vercel/blob";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
 import crypto from "crypto";
+
+const r2 = new S3Client({
+  region: "auto",
+  endpoint: `https://${process.env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
+  credentials: {
+    accessKeyId: process.env.R2_ACCESS_KEY_ID,
+    secretAccessKey: process.env.R2_SECRET_ACCESS_KEY,
+  },
+});
 
 export const runtime = "nodejs";
 
@@ -41,12 +50,18 @@ export async function POST(request) {
       return Response.json({ error: "No file provided" }, { status: 400 });
     }
 
-    // Upload to Vercel Blob
-    const blob = await put(file.name, file, {
-      access: "public",
-    });
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const key = file.name;
 
-    return Response.json({ url: blob.url }, { status: 200 });
+    await r2.send(new PutObjectCommand({
+      Bucket: process.env.R2_BUCKET_NAME,
+      Key: key,
+      Body: buffer,
+      ContentType: file.type,
+    }));
+
+    const url = `${process.env.R2_PUBLIC_URL}/${key}`;
+    return Response.json({ url }, { status: 200 });
   } catch (err) {
     console.error("Upload error:", err);
     return Response.json({ error: "Upload failed" }, { status: 500 });
