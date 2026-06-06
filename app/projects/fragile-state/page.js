@@ -184,7 +184,7 @@ export default function FragileState() {
         </section>
 
         {/* Gallery */}
-        <section id="gallery" className="py-[12rem] max-[768px]:py-0 max-[768px]:pb-[15rem] min-h-[60vh] flex flex-col items-center justify-start">
+        <section id="gallery" className="py-[12rem] min-h-[60vh] flex flex-col items-center justify-start max-[768px]:hidden">
           <h2
             className="text-center w-full font-light mb-6 text-white mt-0"
             style={{ fontSize: "4rem", textShadow: "0 0 10px rgba(0,255,200,0.4)" }}
