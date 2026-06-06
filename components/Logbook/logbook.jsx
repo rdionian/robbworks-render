@@ -78,7 +78,6 @@ export default function Logbook({ project }) {
               media: e.media ? JSON.parse(e.media) : [],
             }));
             setEntries(parsed);
-            setCurrentIndex(0);
           }
         } catch {
           setEntries([]);
@@ -407,10 +406,10 @@ export default function Logbook({ project }) {
 
           {!isAdmin && entries.length > 1 && (
             <>
-              <button className={styles.pageFlipLeft} onPointerDown={handlePrev}>
+              <button className={styles.pageFlipLeft} onClick={handlePrev}>
                 <FaArrowAltCircleLeft />
               </button>
-              <button className={styles.pageFlipRight} onPointerDown={handleNext}>
+              <button className={styles.pageFlipRight} onClick={handleNext}>
                 <FaArrowAltCircleRight />
               </button>
             </>
