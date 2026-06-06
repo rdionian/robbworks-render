@@ -94,10 +94,14 @@ export default function Logbook({ project }) {
   const viewerEntry = entries[currentIndex];
 
   // ---- nav
-  const handlePrev = () =>
+  const handlePrev = () => {
+    console.log("prev clicked, current index:", currentIndex);
     setCurrentIndex((p) => (p > 0 ? p - 1 : Math.max(entries.length - 1, 0)));
-  const handleNext = () =>
+  };
+  const handleNext = () => {
+    console.log("next clicked, current index:", currentIndex);
     setCurrentIndex((p) => (p < entries.length - 1 ? p + 1 : 0));
+  };
 
   // ---- youtube url -> id
   function youtubeIdFromUrl(url) {
