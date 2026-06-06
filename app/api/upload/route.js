@@ -51,7 +51,8 @@ export async function POST(request) {
     }
 
     const buffer = Buffer.from(await file.arrayBuffer());
-    const key = file.name;
+    const ext = file.name.split(".").pop();
+    const key = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
 
     await r2.send(new PutObjectCommand({
       Bucket: process.env.R2_BUCKET_NAME,
