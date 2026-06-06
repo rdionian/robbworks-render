@@ -142,11 +142,6 @@ export async function POST(request) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  // 🛡️ CSRF / Origin (dev-safe, strict in prod)
-  if (!isAllowedOrigin(request)) {
-    return Response.json({ error: "Bad origin" }, { status: 403 });
-  }
-
   const contentType = request.headers.get("content-type") || "";
 
   if (!contentType.includes("application/json")) {
