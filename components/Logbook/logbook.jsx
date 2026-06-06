@@ -78,7 +78,6 @@ export default function Logbook({ project }) {
               media: e.media ? JSON.parse(e.media) : [],
             }));
             setEntries(parsed);
-            setCurrentIndex(0);
           }
         } catch {
           setEntries([]);
@@ -94,14 +93,10 @@ export default function Logbook({ project }) {
   const viewerEntry = entries[currentIndex];
 
   // ---- nav
-  const handlePrev = () => {
-    console.log("prev clicked, current index:", currentIndex);
+  const handlePrev = () =>
     setCurrentIndex((p) => (p > 0 ? p - 1 : Math.max(entries.length - 1, 0)));
-  };
-  const handleNext = () => {
-    console.log("next clicked, current index:", currentIndex);
+  const handleNext = () =>
     setCurrentIndex((p) => (p < entries.length - 1 ? p + 1 : 0));
-  };
 
   // ---- youtube url -> id
   function youtubeIdFromUrl(url) {

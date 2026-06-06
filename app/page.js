@@ -82,7 +82,7 @@ export default function Portfolio() {
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center z-10 text-white p-4"
           style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.8)", maxWidth: "80%" }}
         >
-          <h1 className="text-[4rem] font-bold m-0 mb-4">Robert Dionian</h1>
+          <h1 className="text-[4rem] max-[768px]:text-[1.8rem] max-[768px]:leading-[1.2] font-bold m-0 mb-4">Robert Dionian</h1>
           <p className="text-[1.5rem] m-0">Software Engineer | Game Development</p>
           <a
             href="#portfolio"

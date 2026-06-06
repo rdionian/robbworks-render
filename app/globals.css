@@ -22,6 +22,75 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Hamburger menu (mobile) */
+
+.hamburger {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  min-height: 38px;
+}
+
+.hamburger-line {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+.hamburger-close {
+  color: #fff;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.96);
+  backdrop-filter: blur(10px);
+  z-index: 998;
+  padding: 70px 0 2rem;
+}
+
+.mobile-nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+}
+
+.mobile-nav .nav-link {
+  font-size: 1.2rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+
 /* Spinner for submit button */
 @keyframes submit-spin {
   to { transform: rotate(360deg); }
