@@ -113,9 +113,8 @@ export default function WebDevelopment() {
         <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5 max-[768px]:grid-cols-1">
           {[
             { title: "Custom Website", desc: "Built from scratch to fit your brand. No templates, no page builders." },
-            { title: "Vercel Hosting", desc: "Fast, reliable hosting with automatic deployments on every update." },
+            { title: "Hosting Setup", desc: "Fast, reliable hosting with automatic deployments on every update — bring your own host or we'll recommend one." },
             { title: "Domain Setup", desc: "Full domain configuration so everything is connected and ready to go." },
-            { title: "Contact Forms", desc: "Functional forms that route inquiries directly to your inbox." },
             { title: "Admin Panel", desc: "Optional dashboard so you can update your own content without touching code." },
             { title: "Maintenance Retainer", desc: "Ongoing support for updates, fixes, and minor changes as your site evolves." },
             { title: "SEO", desc: "Your site is built with search engines in mind — proper metadata, fast load times, and clean structure so you can be found." },
